@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cartilha de cibersegurança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--n:#0E2B2A;--n2:#164441;--c:#A64B25;--t:#3B5B7A;--m:#EAF1EF;--p:#F7E9DF;--ink:#16282a;--h:'Bricolage Grotesque','Figtree',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--n);color:var(--ink);font:15.5px/1.55 'Figtree',system-ui,sans-serif;display:grid;grid-template-rows:1fr auto;justify-items:center;padding:10px 8px calc(8px + env(safe-area-inset-bottom));overflow-x:hidden}
+.book{position:relative;width:min(540px,100%);height:calc(100dvh - 78px);max-height:800px;align-self:center;perspective:1800px}
+.book::before{content:"";position:absolute;inset:0;background:#fff;border-radius:4px 10px 10px 4px;box-shadow:5px 5px 0 #d5e0dd,10px 10px 0 #c3d0cc;z-index:-1}
+.leaf{position:absolute;inset:0;transform-origin:left center;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border-radius:4px 10px 10px 4px;overflow:hidden;display:flex;flex-direction:column}
+.ready .leaf{transition:transform .75s cubic-bezier(.6,.05,.3,1),opacity .2s .55s}
+.leaf.turned{transform:rotateY(-90deg);opacity:0;pointer-events:none}
+.ready .leaf:not(.turned){transition:transform .75s cubic-bezier(.6,.05,.3,1),opacity .1s}
+.leaf::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.18),transparent 7%)}
+.band{background:var(--c);color:#fff;padding:9px 24px;font:600 .85rem var(--h);flex:none}
+.sheet{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:20px 26px 12px;container-type:inline-size}
+.foot{flex:none;display:flex;justify-content:space-between;align-items:center;padding:6px 26px 10px;font-size:.78rem;color:#6b6f76}
+h1,h2{font-family:var(--h);color:var(--n);line-height:1.1;letter-spacing:-.01em}
+h2{font-size:1.65rem;margin-bottom:10px}
+h3{font:700 1.02rem var(--h);color:var(--c);margin:16px 0 4px}
+p+p{margin-top:8px}
+.lead{font-size:1.06rem}
+b{color:var(--n)}
+.sign{text-align:center;margin-top:30px;padding-top:16px;border-top:1px solid #cfdcd8}.sign img{height:auto;display:block;margin:0 auto 10px}.sign p{display:flex;flex-direction:column;gap:2px;font-size:.84rem}.sign a{color:var(--n2);text-decoration:none;padding:3px 0}.sign a:hover,.sign a:focus-visible{color:var(--c);text-decoration:underline}.il{float:right;width:112px;height:auto;margin:0 0 8px 12px}.duo,.alert,.note{clear:both}.big{font:800 3.6rem/1 var(--h);color:var(--c);margin:2px 0 4px}
+.duo{display:grid;gap:10px;margin-top:12px}
+@container (min-width:430px){.duo{grid-template-columns:1fr 1fr}}
+.box{border-radius:8px;padding:12px 14px;background:var(--m)}
+.box.s{background:var(--p)}
+.box h3{margin-top:0;color:var(--t)}.box.s h3{color:#7a3a18}
+ul{padding-left:18px}li{margin:3px 0}
+.ex{font-size:.88rem;margin-top:8px;padding-top:6px;border-top:1px dashed #aebdb9;color:#3b4048}
+.rule{border-left:4px solid var(--c);padding:2px 0 2px 12px;margin-top:12px}
+.rule b{display:block;font:700 1rem var(--h)}
+.alert{background:var(--c);color:#fff;border-radius:8px;padding:12px 14px;margin-top:14px}.alert b{color:#fff}
+.note{background:var(--n);color:#e6e8eb;border-radius:8px;padding:12px 14px;margin-top:14px}.note b{color:#F2B48C}
+.lv{display:grid;grid-template-columns:7.2rem 1fr;gap:2px 10px;padding:9px 12px;color:#fff;border-radius:6px;margin-top:6px;font-size:.88rem}
+.lv b{color:#fff;font:700 1rem var(--h);grid-row:span 2;align-self:center}
+.lv:nth-last-of-type(4){background:#7fa39c}.lv:nth-last-of-type(3){background:#4e807a}.lv:nth-last-of-type(2){background:#2f625d}.lv:nth-last-of-type(1){background:var(--n)}
+.cmp li{list-style:none;position:relative;padding-left:22px}
+.cmp li::before{position:absolute;left:0;font-weight:700}
+.no li::before{content:"✕";color:#9b2c2c}.ok li::before{content:"✓";color:var(--t)}
+.st{counter-reset:s;list-style:none;padding:0}
+.st li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;margin:9px 0}
+.st li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font:700 .95rem/30px var(--h);text-align:center}
+.url{display:inline-block;border-radius:20px;padding:2px 12px;font-size:.88rem;margin:2px 4px 2px 0}
+.u1{background:#f4dcdc;color:#9b2c2c}.u2{background:#e0efe6;color:#1f5c4a}
+.cover{background:radial-gradient(circle at 88% 6%,#f7d9c4 0,transparent 40%),radial-gradient(circle at 4% 96%,#cfe3dd 0,transparent 46%),linear-gradient(160deg,#f6faf8,#e4eeea);color:var(--ink);padding:34px 28px 28px;justify-content:space-between}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(14,43,42,.16) 1px,transparent 1.6px) 0 0/18px 18px;pointer-events:none}
+.cover>*{position:relative;z-index:1}
+.cover h1{color:#0E2B2A;font-size:2.35rem;font-weight:800}
+.cover p{color:#3d5552}
+.cover .art{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
+.hint{position:absolute;top:0;bottom:0;width:17%;z-index:300;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .2s;font:700 1.6rem var(--h);color:var(--n)}
+.hl{left:0;background:linear-gradient(90deg,rgba(2,31,71,.14),transparent)}.hr{right:0;background:linear-gradient(-90deg,rgba(2,31,71,.14),transparent)}
+.book.l .hl,.book.r .hr{opacity:1}
+.book.first .hl,.book.last .hr{opacity:0!important}
+@media (hover:none){.hint{opacity:.45}}
+.nav{display:flex;align-items:center;gap:12px;color:#d6d9de;font-size:.85rem;height:52px}
+.nav button{width:42px;height:42px;border-radius:50%;border:0;background:#fff;color:var(--n);font-size:1.3rem;cursor:pointer}
+.nav button:disabled{opacity:.3}
+.nav button:focus-visible{outline:3px solid #F2B48C;outline-offset:2px}
+.dots{display:flex;gap:7px}
+.dots button{width:10px;height:10px;padding:0;background:#4f6e6a}
+.dots button[aria-current]{background:#fff;width:24px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){.ready .leaf{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+<symbol id="shield" viewBox="0 0 100 110"><path d="M50 4 92 20v34c0 28-19 46-42 54C27 100 8 82 8 54V20Z" fill="#C4673A"/><path d="M50 12 84 25v29c0 22-15 38-34 45C31 92 16 76 16 54V25Z" fill="#0E2B2A"/><rect x="34" y="50" width="32" height="26" rx="5" fill="#fff"/><path d="M40 50v-9a10 10 0 0 1 20 0v9" fill="none" stroke="#fff" stroke-width="6"/><circle cx="50" cy="62" r="4" fill="#A64B25"/><rect x="48" y="62" width="4" height="9" rx="2" fill="#A64B25"/></symbol>
+<symbol id="ok" viewBox="0 0 100 110"><path d="M50 4 92 20v34c0 28-19 46-42 54C27 100 8 82 8 54V20Z" fill="#A64B25"/><path d="M30 56l15 15 27-30" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="doc" viewBox="0 0 120 90"><rect x="28" y="6" width="58" height="76" rx="6" fill="#fff" stroke="#0E2B2A" stroke-width="4"/><path d="M40 26h34M40 38h34M40 50h22" stroke="#aebdb9" stroke-width="4" stroke-linecap="round"/><circle cx="86" cy="64" r="22" fill="#A64B25"/><rect x="77" y="62" width="18" height="14" rx="3" fill="#fff"/><path d="M81 62v-5a5 5 0 0 1 10 0v5" fill="none" stroke="#fff" stroke-width="3"/></symbol>
+<symbol id="fp" viewBox="0 0 120 90"><g fill="none" stroke="#C4673A" stroke-width="5" stroke-linecap="round"><circle cx="60" cy="45" r="10" stroke-dasharray="36 12"/><circle cx="60" cy="45" r="22" stroke-dasharray="80 18" stroke="#164441"/><circle cx="60" cy="45" r="34" stroke-dasharray="120 30"/></g><circle cx="60" cy="45" r="3" fill="#A64B25"/></symbol>
+<symbol id="vault" viewBox="0 0 120 90"><rect x="22" y="8" width="76" height="68" rx="9" fill="#0E2B2A"/><rect x="30" y="16" width="60" height="52" rx="5" fill="#164441"/><circle cx="60" cy="42" r="17" fill="none" stroke="#F2B48C" stroke-width="5"/><path d="M60 30v24M48 42h24" stroke="#F2B48C" stroke-width="4"/><rect x="34" y="76" width="10" height="8" fill="#0E2B2A"/><rect x="76" y="76" width="10" height="8" fill="#0E2B2A"/></symbol>
+<symbol id="lap" viewBox="0 0 120 90"><rect x="24" y="8" width="72" height="52" rx="5" fill="#0E2B2A"/><path d="M60 18l17 30H43Z" fill="#FFC000"/><path d="M60 28v10" stroke="#0E2B2A" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="43" r="2.5" fill="#0E2B2A"/><path d="M10 66h100l-8 12H18Z" fill="#c3d0cc"/></symbol>
+<symbol id="hook" viewBox="0 0 120 90"><rect x="14" y="26" width="80" height="54" rx="6" fill="#fff" stroke="#0E2B2A" stroke-width="4"/><path d="M14 32 54 60 94 32" fill="none" stroke="#0E2B2A" stroke-width="4"/><path d="M96 2v36a12 12 0 0 1-24 0" fill="none" stroke="#A64B25" stroke-width="6" stroke-linecap="round"/><path d="M72 38l-6-7M72 38l8-6" stroke="#A64B25" stroke-width="5" stroke-linecap="round"/></symbol><symbol id="tun" viewBox="0 0 120 90"><rect x="6" y="28" width="28" height="34" rx="5" fill="#0E2B2A"/><rect x="86" y="28" width="28" height="34" rx="5" fill="#0E2B2A"/><rect x="34" y="38" width="52" height="14" fill="#164441"/><path d="M34 45h52" stroke="#F2B48C" stroke-width="2" stroke-dasharray="4 4"/><circle cx="60" cy="45" r="15" fill="#C4673A"/><rect x="52" y="44" width="16" height="12" rx="3" fill="#fff"/><path d="M55 44v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#fff" stroke-width="3"/></symbol>
+</svg>
+
+<main class="book" id="book" role="region" aria-label="Cartilha, vire a página tocando nas laterais">
+
+<article class="leaf cover" aria-label="Capa">
+ <svg class="art" viewBox="0 0 400 280" role="img" aria-label="Janela de navegador protegida por um escudo, com lupa sobre um inseto"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F6C7A4"/><stop offset="1" stop-color="#C4673A"/></linearGradient></defs><ellipse cx="200" cy="262" rx="150" ry="10" fill="#0E2B2A" opacity=".12"/><rect x="40" y="36" width="250" height="176" rx="14" fill="#fff" stroke="#0E2B2A" stroke-width="3"/><path d="M40 50a14 14 0 0 1 14-14h222a14 14 0 0 1 14 14v18H40Z" fill="#0E2B2A"/><circle cx="58" cy="52" r="4" fill="#F2B48C"/><circle cx="72" cy="52" r="4" fill="#C4673A"/><circle cx="86" cy="52" r="4" fill="#7fa39c"/><rect x="104" y="44" width="170" height="16" rx="8" fill="#164441"/><rect x="113" y="50" width="7" height="6" rx="1.5" fill="#F2B48C"/><path d="M114.5 50v-1.5a2 2 0 0 1 4 0V50" fill="none" stroke="#F2B48C"/><text x="125" y="56" font-family="monospace" font-size="8" fill="#F2B48C">https://</text><rect x="62" y="88" width="130" height="11" rx="5.5" fill="#0E2B2A"/><rect x="62" y="110" width="190" height="7" rx="3.5" fill="#c3d0cc"/><rect x="62" y="124" width="168" height="7" rx="3.5" fill="#c3d0cc"/><rect x="62" y="138" width="180" height="7" rx="3.5" fill="#c3d0cc"/><rect x="62" y="158" width="206" height="40" rx="8" fill="#EAF1EF"/><rect x="74" y="168" width="60" height="6" rx="3" fill="#C4673A"/><rect x="74" y="180" width="110" height="6" rx="3" fill="#7fa39c"/><rect x="196" y="168" width="50" height="6" rx="3" fill="#3B5B7A"/><path d="M320 120 372 140v44c0 34-22 56-52 68-30-12-52-34-52-68v-44Z" fill="url(#g2)" stroke="#fff" stroke-width="4"/><path d="M296 186l16 16 34-36" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="346" cy="66" r="24" fill="#F6C7A4" fill-opacity=".55" stroke="#0E2B2A" stroke-width="6"/><path d="M364 84 384 104" stroke="#0E2B2A" stroke-width="9" stroke-linecap="round"/><ellipse cx="346" cy="69" rx="7" ry="9" fill="#A64B25"/><circle cx="346" cy="58" r="4" fill="#A64B25"/><path d="M339 64l-8-4M339 70h-9M340 76l-7 5M353 64l8-4M353 70h9M352 76l7 5" stroke="#A64B25" stroke-width="2" stroke-linecap="round"/><g fill="none" stroke="#C4673A" stroke-width="2"><circle cx="24" cy="90" r="6"/><circle cx="378" cy="238" r="5"/><path d="M20 236h12M26 230v12"/></g></svg>
+ <div>
+  <h1>Cibersegurança no dia a dia</h1>
+  <p class="lead" style="margin-top:12px">Malwares, VPNs, engenharia social e hábitos simples para proteger você e a sua empresa.</p>
+ </div>
+ <p style="font-size:.85rem">Cartilha de cibersegurança · Angélica Kadja<br><b style="color:#A64B25">Toque na lateral direita para virar a página →</b></p>
+</article>
+
+<article class="leaf" aria-label="Tipos de malware">
+ <div class="band">Tipos de malware</div>
+ <div class="sheet">
+<svg class="il" viewBox="0 0 120 90" aria-hidden="true"><use href="#lap"/></svg>  <h2>Conheça os tipos de vírus</h2>
+  <p class="lead">Malware é qualquer software criado para causar dano, roubar dados ou dar acesso indevido. O "vírus" é só um dos tipos.</p>
+<div class="rule"><b>Vírus</b>Anexa-se a arquivos e precisa que alguém os execute para se espalhar.</div>
+<div class="rule"><b>Worm (verme)</b>Propaga-se sozinho pela rede, sem ação do usuário, e pode derrubar sistemas inteiros.</div>
+<div class="rule"><b>Trojan (cavalo de Troia)</b>Disfarçado de programa útil, abre portas para invasores.</div>
+<div class="rule"><b>Ransomware</b>Criptografa seus arquivos e exige resgate para liberá-los. Hoje é uma das ameaças mais danosas para empresas.</div>
+<div class="rule"><b>Spyware e keylogger</b>Espionam o que você faz e registram o que você digita para roubar senhas.</div>
+<div class="rule"><b>Adware</b>Exibe propagandas invasivas e costuma vir embutido em outros programas.</div>
+<div class="rule"><b>Rootkit</b>Esconde-se nas camadas profundas do sistema para manter acesso sem ser detectado.</div>
+<div class="rule"><b>Botnet</b>Rede de computadores infectados, controlados à distância para ataques e envio de spam.</div>
+  <div class="note"><b>Sinais de infecção:</b> lentidão repentina, pop-ups, programas que você não instalou e arquivos que não abrem ou mudam de extensão. Desconfiou? Desconecte da rede e avise a TI.</div>
+ </div>
+ <div class="foot"><span>Cartilha de cibersegurança por Angélica Kadja</span><span>pág. 2</span></div>
+</article>
+<article class="leaf" aria-label="VPN: tipos e protocolos">
+ <div class="band">VPN: o que é</div>
+ <div class="sheet">
+<svg class="il" viewBox="0 0 120 90" aria-hidden="true"><use href="#tun"/></svg>  <h2>VPN: o que é e para que serve</h2>
+  <p class="lead">A VPN (rede privada virtual) cria um túnel criptografado entre o seu dispositivo e a internet ou a rede da empresa.</p>
+  <p>Ela protege o tráfego em Wi-Fi público e oculta o seu IP dos sites que você visita.</p>
+  <div class="note"><b>Cuidado com o mito:</b> VPN não torna você anônimo e não substitui antivírus, senha forte e bom senso. Ela protege só o caminho dos dados.</div>
+  <h3>Principais tipos</h3>
+<div class="rule"><b>VPN corporativa (acesso remoto)</b>Conecta o colaborador à rede da empresa. É a que deve ser usada para acessar sistemas internos.</div>
+<div class="rule"><b>VPN site-to-site</b>Liga de forma permanente as redes da matriz e das filiais.</div>
+<div class="rule"><b>VPN pessoal (comercial)</b>Serviço contratado para privacidade, Wi-Fi público e acesso a conteúdo de outras regiões.</div>
+  <h3>Protocolos</h3>
+  <ul class="cmp ok"><li><b>WireGuard, OpenVPN e IKEv2/IPsec:</b> modernos e confiáveis</li></ul>
+  <ul class="cmp no"><li><b>PPTP:</b> ultrapassado e vulnerável, evite</li></ul>
+ </div>
+ <div class="foot"><span>Cartilha de cibersegurança por Angélica Kadja</span><span>pág. 3</span></div>
+</article>
+<article class="leaf" aria-label="VPN gratuita, freemium e paga">
+ <div class="band">Grátis nem sempre é de graça</div>
+ <div class="sheet">
+<svg class="il" viewBox="0 0 120 90" aria-hidden="true"><use href="#vault"/></svg>  <h2>VPN gratuita: o risco escondido</h2>
+  <p class="lead">Manter uma VPN custa caro: servidores, banda e equipe de segurança. Quando o usuário não paga, a conta costuma ser paga com os seus dados.</p>
+  <ul class="cmp no" style="margin-top:8px"><li>Venda de dados de navegação a anunciantes</li><li>Rastreadores e anúncios embutidos no aplicativo</li><li>Criptografia fraca e vazamentos de IP e DNS</li><li>Permissões exageradas e, em casos graves, apps feitos para espalhar malware</li></ul>
+  <h3>E as freemium?</h3>
+  <p>São versões gratuitas e limitadas de provedores que vivem de assinaturas. Como o lucro vem de quem paga, tendem a ser mais seguras que as gratuitas puras: costumam ter política de não guardar registros (no-logs), auditorias independentes e criptografia moderna. O limite está no uso, com menos servidores, velocidade e dados.</p>
+  <div class="note"><b>Como escolher:</b> política no-logs auditada, protocolos modernos, kill switch, empresa identificável e app da loja oficial. Mesmo sendo freemium, avalie a reputação do provedor.</div>
+  <div class="lv"><b>Gratuita pura</b><span>Os seus dados podem ser o produto</span><span>Risco: maior</span></div>
+  <div class="lv"><b>Freemium</b><span>Provedor confiável, com uso limitado</span><span>Risco: moderado</span></div>
+  <div class="lv"><b>Paga</b><span>Auditorias, suporte e sem limites</span><span>Risco: menor</span></div>
+  <div class="lv"><b>Corporativa</b><span>Gerenciada pela TI da empresa</span><span>Recomendada no trabalho</span></div>
+ </div>
+ <div class="foot"><span>Cartilha de cibersegurança por Angélica Kadja</span><span>pág. 4</span></div>
+</article>
+<article class="leaf" aria-label="Engenharia social">
+ <div class="band">Engenharia social</div>
+ <div class="sheet">
+<svg class="il" viewBox="0 0 120 90" aria-hidden="true"><use href="#hook"/></svg>  <h2>Engenharia social: hackear pessoas</h2>
+  <p class="lead">Em vez de invadir sistemas, o golpista engana quem os usa. É a porta de entrada da maioria dos ataques, pois explora emoções, não falhas técnicas.</p>
+<div class="rule"><b>Phishing</b>E-mails falsos que imitam bancos, empresas e colegas para roubar dados.</div>
+<div class="rule"><b>Smishing e vishing</b>O mesmo golpe por SMS e WhatsApp (smishing) e por ligação (vishing).</div>
+<div class="rule"><b>Pretexting</b>História inventada, como falso suporte técnico ou fornecedor, para obter informações.</div>
+<div class="rule"><b>Baiting</b>Isca, como um pendrive "perdido" ou um brinde grátis infectado.</div>
+<div class="rule"><b>Quishing</b>QR code falso colado em cartazes ou enviado por e-mail.</div>
+<div class="rule"><b>Golpe do falso chefe</b>Mensagem urgente de um suposto executivo pedindo pagamento ou dados.</div>
+<div class="rule"><b>Deepfake</b>Voz e vídeo falsos criados com IA para imitar pessoas conhecidas.</div>
+  <h3>Os gatilhos usados</h3>
+  <p>Urgência, medo, autoridade, curiosidade e promessa de ganho fácil.</p>
+  <div class="alert"><b>Pare, respire e confirme por outro canal.</b> Ligue para a pessoa em um número que você já tem, nunca no que veio na mensagem.</div>
+ </div>
+ <div class="foot"><span>Cartilha de cibersegurança por Angélica Kadja</span><span>pág. 5</span></div>
+</article>
+<article class="leaf" aria-label="Hábitos de defesa">
+ <div class="band">Hábitos de defesa</div>
+ <div class="sheet">
+<svg class="il" viewBox="0 0 120 90" aria-hidden="true"><use href="#fp"/></svg>  <h2>Hábitos que blindam o seu dia a dia</h2>
+  <ul class="cmp ok" style="padding:0">
+   <li style="margin:11px 0"><b>Senhas longas e únicas.</b> Use um gerenciador de senhas e nunca repita a mesma em duas contas</li>
+   <li style="margin:11px 0"><b>Autenticação em duas etapas (MFA).</b> Ative em todas as contas importantes, de preferência com app autenticador</li>
+   <li style="margin:11px 0"><b>Atualizações em dia.</b> Sistema e aplicativos corrigem falhas que os malwares exploram</li>
+   <li style="margin:11px 0"><b>Backup 3-2-1.</b> Três cópias, em duas mídias diferentes, uma delas fora do local. Teste a restauração</li>
+   <li style="margin:11px 0"><b>Wi-Fi público com cautela.</b> Evite acessar bancos e sistemas da empresa, ou use uma VPN confiável</li>
+   <li style="margin:11px 0"><b>Fontes oficiais.</b> Instale apps só das lojas oficiais e fuja de programas piratas e "cracks"</li>
+   <li style="margin:11px 0"><b>USB e anexos desconhecidos.</b> Não conecte nem abra</li>
+   <li style="margin:11px 0"><b>Antivírus e firewall ativos.</b> Mantenha as proteções ligadas e atualizadas</li>
+  </ul>
+ </div>
+ <div class="foot"><span>Cartilha de cibersegurança por Angélica Kadja</span><span>pág. 6</span></div>
+</article>
+<article class="leaf" aria-label="Se algo der errado">
+ <div class="band">Se algo der errado</div>
+ <div class="sheet">
+<svg class="il" viewBox="0 0 100 110" aria-hidden="true"><use href="#ok"/></svg>  <h2>Algo deu errado? Aja rápido</h2>
+  <ol class="st">
+   <li><span><b>Mantenha a calma.</b> Errar é humano; esconder é o que agrava.</span></li>
+   <li><span><b>Desconecte da rede.</b> Tire o cabo ou o Wi-Fi, sem desligar o aparelho.</span></li>
+   <li><span><b>Avise a TI/Segurança</b> imediatamente, mesmo fora do horário.</span></li>
+   <li><span><b>Troque as senhas</b> de outro dispositivo seguro e ative o MFA.</span></li>
+   <li><span><b>Registre</b> prints, horário e o que foi feito.</span></li>
+  </ol>
+  <div class="alert"><b>Ransomware:</b> não pague nem negocie por conta própria. Acione a TI e a liderança.</div>
+  <div class="note"><b>Ficou com dúvida?</b><br>Fale com a TI/Segurança da sua empresa.<br>Na dúvida, pergunte antes de agir.</div>
+  <div class="sign"><img src="data:image/webp;base64,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" alt="K&amp;D" width="96"><p><a href="https://github.com/angelicakadja" target="_blank" rel="noopener">Angélica Kadja - GitHub</a><a href="https://www.linkedin.com/in/adm-angelicakadja" target="_blank" rel="noopener">Angélica Kadja - LinkedIn</a><a href="https://sintesenuaecrua.blogspot.com/" target="_blank" rel="noopener">Angélica Kadja - Blogger</a></p></div>
+ </div>
+ <div class="foot"><span>Material de apoio ao treinamento por Angélica Kadja</span><span>pág. 7</span></div>
+</article>
+
+<div class="hint hl" aria-hidden="true">‹</div><div class="hint hr" aria-hidden="true">›</div>
+</main>
+
+<nav class="nav" aria-label="Navegação">
+ <button id="pv" aria-label="Página anterior">‹</button>
+ <div class="dots" id="dots"></div>
+ <button id="nx" aria-label="Próxima página">›</button>
+</nav>
+<p id="live" aria-live="polite" style="position:absolute;left:-9999px"></p>
+
+<script>
+const book=document.getElementById('book'),L=[...book.querySelectorAll('.leaf')],N=L.length,dots=document.getElementById('dots');
+let cur=0;
+L.forEach((_,i)=>{const b=document.createElement('button');b.setAttribute('aria-label','Ir para a página '+(i+1));b.onclick=()=>go(i);dots.append(b)});
+function go(n){
+  n=Math.max(0,Math.min(N-1,n));const ch=n!==cur;cur=n;
+  L.forEach((l,i)=>{l.classList.toggle('turned',i<cur);l.style.zIndex=N-i;l.inert=i!==cur});
+  [...dots.children].forEach((d,i)=>i===cur?d.setAttribute('aria-current','page'):d.removeAttribute('aria-current'));
+  book.classList.toggle('first',cur===0);book.classList.toggle('last',cur===N-1);
+  pv.disabled=cur===0;nx.disabled=cur===N-1;
+  const s=L[cur].querySelector('.sheet');if(s&&ch)s.scrollTop=0;
+  document.getElementById('live').textContent='Página '+(cur+1)+' de '+N+': '+L[cur].getAttribute('aria-label');
+  history.replaceState(null,'','#p'+(cur+1));
+}
+const pv=document.getElementById('pv'),nx=document.getElementById('nx');
+pv.onclick=()=>go(cur-1);nx.onclick=()=>go(cur+1);
+const zone=e=>{const r=book.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;return x<.17?-1:x>.83?1:0};
+book.addEventListener('click',e=>{if(getSelection().toString()||e.target.closest('a'))return;const z=zone(e);if(z)go(cur+z)});
+book.addEventListener('pointermove',e=>{const z=zone(e);book.classList.toggle('l',z<0);book.classList.toggle('r',z>0);book.style.cursor=z<0&&cur>0?'w-resize':z>0&&cur<N-1?'e-resize':''});
+book.addEventListener('pointerleave',()=>book.classList.remove('l','r'));
+let sx,sy;
+book.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+book.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dy)<40)go(cur+(dx<0?1:-1))},{passive:true});
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);if(e.key==='Home')go(0);if(e.key==='End')go(N-1)});
+const m=location.hash.match(/^#p(\d+)$/);cur=-1;go(m?m[1]-1:0);
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('ready')));
+</script>
+</body>
+</html>
