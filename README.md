@@ -1,6 +1,6 @@
-![Typing SVG](<https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=267A76&background=33FF3100&center=true&vCenter=true&width=520&lines=Bem-vindo+(a)+a+cartilha+de+Cibersegurança!>)
-
 <div align='center'>
+
+![Typing SVG](<https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=267A76&background=33FF3100&center=true&vCenter=true&width=520&lines=Bem-vindo+(a)+a+cartilha+de+Cibersegurança!>)
 
 <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Winking%20Face%20with%20Tongue.png" alt="Hand with Fingers Splayed Light Skin Tone" width="25" height="25" />
 
@@ -18,7 +18,7 @@
 
 Material de apoio para treinamentos corporativos: uma cartilha interativa e responsiva, em formato de livro, que reúne o essencial para reconhecer ameaças digitais e adotar hábitos seguros no dia a dia.
 
-**[Acessar a cartilha](https://angelicakadja.github.io/cartilha-ciberseguranca/)**
+**[Acessar a cartilha](https://angelicakadja.github.io/Treinamento-Ciberseguranca/#p1)**
 
 ## O que você vai encontrar
 
